@@ -113,6 +113,15 @@ python simulations/gravitational_wave_injection.py
 This simulation traces `h(t) -> Delta L(t) -> Delta phi(t) -> I(t)` and saves
 the plots in `results/`.
 
+Compare static interferometer operating points:
+
+```powershell
+python simulations/operating_point.py
+```
+
+This simulation shows how a tiny phase perturbation becomes linear near
+`Delta phi_0 = pi/2`.
+
 ---
 
 ## License
