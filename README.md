@@ -96,6 +96,14 @@ python simulations/basic_interferometer.py
 
 The plot is saved to `results/basic_interferometer_fringe.png`.
 
+Run the first time-dependent simulation:
+
+```powershell
+python simulations/time_dependent_interferometer.py
+```
+
+The displacement and photodetector output plots are saved in `results/`.
+
 ---
 
 ## License
