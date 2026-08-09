@@ -104,6 +104,15 @@ python simulations/time_dependent_interferometer.py
 
 The displacement and photodetector output plots are saved in `results/`.
 
+Run the first gravitational-wave strain injection:
+
+```powershell
+python simulations/gravitational_wave_injection.py
+```
+
+This simulation traces `h(t) -> Delta L(t) -> Delta phi(t) -> I(t)` and saves
+the plots in `results/`.
+
 ---
 
 ## License
