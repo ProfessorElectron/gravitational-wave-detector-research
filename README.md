@@ -131,6 +131,15 @@ python simulations/noisy_detector.py
 This simulation uses the `pi/2` operating point and compares the same injected
 signal against several controlled Gaussian noise levels.
 
+Run the first RMS SNR sweep:
+
+```powershell
+python simulations/snr_analysis.py
+```
+
+This simulation calculates RMS signal, RMS noise, and SNR across Gaussian noise
+levels, then plots SNR against noise standard deviation.
+
 ---
 
 ## License
