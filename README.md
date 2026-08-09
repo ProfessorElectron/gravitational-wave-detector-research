@@ -122,6 +122,15 @@ python simulations/operating_point.py
 This simulation shows how a tiny phase perturbation becomes linear near
 `Delta phi_0 = pi/2`.
 
+Add simple Gaussian measurement noise:
+
+```powershell
+python simulations/noisy_detector.py
+```
+
+This simulation uses the `pi/2` operating point and compares the same injected
+signal against several controlled Gaussian noise levels.
+
 ---
 
 ## License
