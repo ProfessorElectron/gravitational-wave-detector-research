@@ -62,31 +62,39 @@ Technical Report and Research Publication
 
 **Current Phase**
 
-Phase 1 – Literature Review & Physics Foundations
+Phase 2/3 - Mathematical Modelling & Computational Interferometer Simulation
 
 **Timeline**
 
-30 July 2026 – 1 August 2026
+30 July 2026 onward
 
 **Current Focus**
 
-- Understanding gravitational waves
-- Studying Michelson interferometry
-- Reviewing LIGO and LISA
-- Building the theoretical foundation
+- Implementing the minimal Michelson interferometer model
+- Calculating differential arm length, phase difference, and detector intensity
+- Sweeping differential displacement to generate the first fringe pattern
 
 ---
 
 ## Repository Structure
 
-docs/
-theory/
+README.md
+requirements.txt
+src/
 simulations/
-signal-processing/
-hardware/
+analysis/
 data/
-paper/
-presentations/  
+results/
+docs/
+papers/
+
+Run the first simulation:
+
+```powershell
+python simulations/basic_interferometer.py
+```
+
+The plot is saved to `results/basic_interferometer_fringe.png`.
 
 ---
 
