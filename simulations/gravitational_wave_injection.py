@@ -74,31 +74,11 @@ def run_gravitational_wave_injection(show_plots: bool = True) -> tuple[Path, ...
     phase_path = results_dir / "gw_injection_phase.png"
     intensity_path = results_dir / "gw_injection_intensity.png"
 
-    figures = []
-    figures.append(_save_time_series_plot(
-        time,
-        strain,
-        "Injected Sinusoidal Gravitational-Wave Strain",
-        "Strain h(t)",
-        strain_path,
-        "#1f77b4",
-    ))
-    figures.append(_save_time_series_plot(
-        time,
-        differential_displacement,
-        "Differential Arm Displacement From Strain",
-        "Differential displacement (m)",
-        displacement_path,
-        "#2ca02c",
-    ))
-    figures.append(_save_time_series_plot(
-        time,
-        phase,
-        "Round-Trip Phase Shift From Strain",
-        "Phase shift (rad)",
-        phase_path,
-        "#9467bd",
-    ))
+    figures = [
+        _save_time_series_plot(time, strain, "Injected Sinusoidal Gravitational-Wave Strain", "Strain h(t)", strain_path, "#1f77b4"),
+        _save_time_series_plot(time, differential_displacement, "Differential Arm Displacement From Strain", "Differential displacement (m)", displacement_path, "#2ca02c"),
+        _save_time_series_plot(time, phase, "Round-Trip Phase Shift From Strain", "Phase shift (rad)", phase_path, "#9467bd"),
+    ]
 
     fig_intensity, ax_intensity = plt.subplots(figsize=(9, 5))
     ax_intensity.plot(time, intensity, color="#d62728", linewidth=2)

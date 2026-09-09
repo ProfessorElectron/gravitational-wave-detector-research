@@ -53,7 +53,7 @@ def intensity_from_arm_lengths(
     input_intensity: float = 1.0,
 ) -> float:
     """Calculate detector intensity directly from Michelson arm lengths."""
-    delta_l = differential_arm_length(length_x, length_y)
-    phase = phase_difference(delta_l, wavelength)
-    return float(photodetector_intensity(phase, input_intensity))
-
+    return float(photodetector_intensity(
+        phase_difference(differential_arm_length(length_x, length_y), wavelength),
+        input_intensity,
+    ))

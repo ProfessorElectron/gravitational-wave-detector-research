@@ -20,7 +20,7 @@ from src.noise import add_gaussian_noise  # noqa: E402
 
 def _response_amplitude(signal: np.ndarray) -> float:
     """Return half the peak-to-peak amplitude of a response."""
-    return 0.5 * float(np.max(signal) - np.min(signal))
+    return 0.5 * float(np.ptp(signal))
 
 
 def run_noisy_detector_simulation(show_plots: bool = True) -> tuple[Path, Path]:
@@ -67,28 +67,13 @@ def run_noisy_detector_simulation(show_plots: bool = True) -> tuple[Path, Path]:
     overlay_path = results_dir / "noisy_detector_overlay.png"
     zoom_path = results_dir / "noisy_detector_signal_vs_noise.png"
 
-    fig_overlay, axes = plt.subplots(
-        len(noise_levels),
-        1,
-        figsize=(10, 8),
-        sharex=True,
-    )
+    fig_overlay, axes = plt.subplots(len(noise_levels), 1, figsize=(10, 8), sharex=True)
     fig_zoom, ax_zoom = plt.subplots(figsize=(9, 5))
 
-    ax_zoom.plot(
-        time,
-        linear_response,
-        color="#111111",
-        linewidth=2,
-        label="Noise-free linear signal",
-    )
+    ax_zoom.plot(time, linear_response, color="#111111", linewidth=2, label="Noise-free linear signal")
 
     for index, noise_standard_deviation in enumerate(noise_levels):
-        measured_response = add_gaussian_noise(
-            signal_response,
-            standard_deviation=noise_standard_deviation,
-            seed=random_seed + index,
-        )
+        measured_response = add_gaussian_noise(signal_response, noise_standard_deviation, random_seed + index)
         measured_intensity = static_intensity + measured_response
         noise_to_signal = noise_standard_deviation / signal_amplitude
 
@@ -97,20 +82,8 @@ def run_noisy_detector_simulation(show_plots: bool = True) -> tuple[Path, Path]:
         print(f"  Measured response std:    {np.std(measured_response):.3e}")
 
         axis = axes[index]
-        axis.plot(
-            time,
-            measured_intensity,
-            color="#1f77b4",
-            linewidth=0.8,
-            label="Noisy measured intensity",
-        )
-        axis.plot(
-            time,
-            intensity,
-            color="#d62728",
-            linewidth=1.8,
-            label="Noise-free intensity",
-        )
+        axis.plot(time, measured_intensity, color="#1f77b4", linewidth=0.8, label="Noisy measured intensity")
+        axis.plot(time, intensity, color="#d62728", linewidth=1.8, label="Noise-free intensity")
         axis.set_title(f"Gaussian measurement noise: sigma = {noise_standard_deviation:.0e}")
         axis.set_ylabel("Intensity")
         axis.ticklabel_format(axis="y", style="plain", useOffset=False)
@@ -151,4 +124,3 @@ def run_noisy_detector_simulation(show_plots: bool = True) -> tuple[Path, Path]:
 
 if __name__ == "__main__":
     run_noisy_detector_simulation()
-

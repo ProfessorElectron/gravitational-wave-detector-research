@@ -15,10 +15,4 @@ def add_gaussian_noise(
         raise ValueError("standard_deviation must be non-negative")
 
     generator = np.random.default_rng(seed)
-    noise = generator.normal(
-        loc=0.0,
-        scale=standard_deviation,
-        size=np.shape(signal),
-    )
-    return signal + noise
-
+    return signal + generator.normal(0.0, standard_deviation, np.shape(signal))

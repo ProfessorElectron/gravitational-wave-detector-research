@@ -19,12 +19,10 @@ def rms_snr(signal: np.ndarray, measured: np.ndarray) -> tuple[float, float, flo
     if np.shape(signal) != np.shape(measured):
         raise ValueError("signal and measured must have the same shape")
 
-    noise = measured - signal
     signal_rms = rms(signal)
-    noise_rms = rms(noise)
+    noise_rms = rms(measured - signal)
 
     if noise_rms == 0.0:
         return signal_rms, noise_rms, float("inf")
 
     return signal_rms, noise_rms, signal_rms / noise_rms
-

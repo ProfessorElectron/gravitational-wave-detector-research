@@ -61,8 +61,7 @@ def run_operating_point_comparison(show_plots: bool = True) -> tuple[Path, Path]
     fig_response, ax_response = plt.subplots(figsize=(9, 5))
 
     for label, static_phase, color in operating_points:
-        phase = static_phase + gw_phase
-        intensity = photodetector_intensity(phase, input_intensity)
+        intensity = photodetector_intensity(static_phase + gw_phase, input_intensity)
         static_intensity = photodetector_intensity(static_phase, input_intensity)
         response = intensity - static_intensity
         linear_response = -0.5 * input_intensity * np.sin(static_phase) * gw_phase

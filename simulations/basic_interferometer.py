@@ -34,12 +34,7 @@ def run_basic_sweep() -> Path:
     length_y = 1.0
     delta_l = differential_arm_length(length_x, length_y)
     phase = phase_difference(delta_l, wavelength)
-    intensity = intensity_from_arm_lengths(
-        length_x=length_x,
-        length_y=length_y,
-        wavelength=wavelength,
-        input_intensity=input_intensity,
-    )
+    intensity = intensity_from_arm_lengths(length_x, length_y, wavelength, input_intensity)
 
     print("Michelson interferometer baseline")
     print(f"Laser wavelength: {wavelength:.3e} m")

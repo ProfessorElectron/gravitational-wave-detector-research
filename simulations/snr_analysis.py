@@ -41,9 +41,7 @@ def run_snr_analysis(show_plots: bool = True) -> Path:
 
     signal_response = -0.5 * input_intensity * np.sin(static_phase) * gw_phase
 
-    signal_rms_values = []
-    noise_rms_values = []
-    snr_values = []
+    signal_rms_values, noise_rms_values, snr_values = [], [], []
 
     print("RMS SNR analysis")
     print(f"Operating point:  pi/2")
@@ -55,11 +53,7 @@ def run_snr_analysis(show_plots: bool = True) -> Path:
     print()
 
     for index, noise_standard_deviation in enumerate(noise_levels):
-        measured_response = add_gaussian_noise(
-            signal_response,
-            standard_deviation=float(noise_standard_deviation),
-            seed=random_seed + index,
-        )
+        measured_response = add_gaussian_noise(signal_response, float(noise_standard_deviation), random_seed + index)
         signal_rms, noise_rms, snr = rms_snr(signal_response, measured_response)
 
         signal_rms_values.append(signal_rms)
@@ -81,13 +75,7 @@ def run_snr_analysis(show_plots: bool = True) -> Path:
     output_path = results_dir / "snr_vs_noise.png"
 
     fig, ax = plt.subplots(figsize=(9, 5))
-    ax.loglog(
-        noise_levels,
-        snr_values,
-        marker="o",
-        linewidth=2,
-        label="Measured RMS SNR",
-    )
+    ax.loglog(noise_levels, snr_values, marker="o", linewidth=2, label="Measured RMS SNR")
     ax.loglog(
         noise_levels,
         expected_snr,
@@ -114,4 +102,3 @@ def run_snr_analysis(show_plots: bool = True) -> Path:
 
 if __name__ == "__main__":
     run_snr_analysis()
-

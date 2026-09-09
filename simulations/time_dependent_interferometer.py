@@ -50,12 +50,7 @@ def run_time_dependent_simulation(show_plots: bool = True) -> tuple[Path, Path]:
     intensity_path = results_dir / "time_dependent_intensity.png"
 
     fig_displacement, ax_displacement = plt.subplots(figsize=(9, 5))
-    ax_displacement.plot(
-        time,
-        differential_displacement,
-        color="#1f77b4",
-        linewidth=2,
-    )
+    ax_displacement.plot(time, differential_displacement, color="#1f77b4", linewidth=2)
     ax_displacement.set_title("Artificial Differential Arm Displacement")
     ax_displacement.set_xlabel("Time (s)")
     ax_displacement.set_ylabel("Differential displacement (m)")
