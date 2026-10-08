@@ -205,16 +205,7 @@ forward as validated numbers.
 
 ### 6.1 Reduction to the Baseline
 
-The general detector-projected strain is
-$h_\mathrm{det}=F_+(\theta,\phi,\psi)h_++F_\times(\theta,\phi,\psi)h_\times
-=d^{ij}h^\mathrm{TT}_{ij}$ with $d^{ij}=\tfrac12(\hat e_x^i\hat e_x^j-\hat e_y^i\hat e_y^j)$.
-At the aligned baseline ($\theta=\phi=\psi=0$, $h_\times=0$) it gives
-$F_+=1$, $F_\times=0$ and $h_\mathrm{det}=h_+\equiv h(t)$. This is the
-exact reduction used to define the working scalar strain. The general
-antenna-pattern expressions are not reproduced here; the Step 9 record writes
-them without the factor of 2 in the $\phi$ and $\psi$ arguments, which does not
-affect the baseline values but should not be copied as the general form
-(Appendix B).
+The general detector-projected strain is \(h_\mathrm{det}=F_+(\theta,\phi,\psi)h_+ + F_\times(\theta,\phi,\psi)h_\times=d^{ij}h^\mathrm{TT}_{ij}\), with \(d^{ij}=\tfrac12(\hat e_x^i\hat e_x^j-\hat e_y^i\hat e_y^j)\). At the aligned baseline \((\theta=\phi=\psi=0,\ h_\times=0)\), it gives \(F_+=1\), \(F_\times=0\), and \(h_\mathrm{det}=h_+\equiv h(t)\). This is the exact reduction used to define the working scalar strain. The general antenna-pattern expressions are not reproduced here; the Step 9 record writes them without the factor of 2 in the \(\phi\) and \(\psi\) arguments, which does not affect the baseline values but should not be copied as the general form (Appendix B).
 
 ### 6.2 Inherited, Simplified, Deferred
 
