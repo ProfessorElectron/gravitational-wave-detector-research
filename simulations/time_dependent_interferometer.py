@@ -29,8 +29,9 @@ def run_time_dependent_simulation(show_plots: bool = True) -> tuple[Path, Path]:
     frequency = 100.0
     duration = 0.1
     sample_count = 10_000
+    sampling_rate = sample_count / duration
 
-    time = np.linspace(0.0, duration, sample_count)
+    time = np.arange(sample_count) / sampling_rate
     differential_displacement = amplitude * np.sin(2.0 * np.pi * frequency * time)
     phase = phase_difference(differential_displacement, wavelength)
     intensity = photodetector_intensity(phase, input_intensity)

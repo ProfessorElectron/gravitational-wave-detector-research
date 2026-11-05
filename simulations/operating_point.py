@@ -17,7 +17,11 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
-from src.gravitational_wave import sinusoidal_strain  # noqa: E402
+from src.gravitational_wave import (  # noqa: E402
+    sinusoidal_strain,
+    strain_to_differential_displacement,
+    warn_if_long_wavelength_approximation_invalid,
+)
 from src.interferometer import phase_difference, photodetector_intensity  # noqa: E402
 
 
@@ -31,6 +35,7 @@ def run_operating_point_comparison(show_plots: bool = True) -> tuple[Path, Path]
     gw_frequency = 100.0
     duration = 0.1
     sample_count = 10_000
+    sampling_rate = sample_count / duration
 
     operating_points = (
         ("phi0 = 0", 0.0, "#1f77b4"),
@@ -38,9 +43,10 @@ def run_operating_point_comparison(show_plots: bool = True) -> tuple[Path, Path]
         ("phi0 = pi/2", np.pi / 2.0, "#2ca02c"),
     )
 
-    time = np.linspace(0.0, duration, sample_count)
+    warn_if_long_wavelength_approximation_invalid(gw_frequency, arm_length)
+    time = np.arange(sample_count) / sampling_rate
     strain = sinusoidal_strain(time, strain_amplitude, gw_frequency)
-    differential_displacement = arm_length * strain
+    differential_displacement = strain_to_differential_displacement(strain, arm_length)
     gw_phase = phase_difference(differential_displacement, wavelength)
     peak_gw_phase = np.max(np.abs(gw_phase))
 

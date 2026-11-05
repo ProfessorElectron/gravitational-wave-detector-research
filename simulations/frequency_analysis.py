@@ -13,7 +13,11 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
-from src.gravitational_wave import sinusoidal_strain  # noqa: E402
+from src.gravitational_wave import (  # noqa: E402
+    sinusoidal_strain,
+    strain_to_differential_displacement,
+    warn_if_long_wavelength_approximation_invalid,
+)
 from src.interferometer import phase_difference  # noqa: E402
 from src.noise import add_gaussian_noise  # noqa: E402
 from src.spectral_analysis import (  # noqa: E402
@@ -38,9 +42,10 @@ def run_frequency_analysis(show_plots: bool = True) -> Path:
     sample_count = int(sampling_rate * duration)
     random_seed = 12345
 
+    warn_if_long_wavelength_approximation_invalid(gw_frequency, arm_length)
     time = np.arange(sample_count) / sampling_rate
     strain = sinusoidal_strain(time, strain_amplitude, gw_frequency)
-    differential_displacement = arm_length * strain
+    differential_displacement = strain_to_differential_displacement(strain, arm_length)
     gw_phase = phase_difference(differential_displacement, wavelength)
 
     # At pi/2 the first-order Michelson readout is linear in the GW phase.

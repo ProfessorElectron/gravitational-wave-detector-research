@@ -46,6 +46,22 @@ def photodetector_intensity(
     return 0.5 * input_intensity * (1.0 + np.cos(phase))
 
 
+def dark_port_intensity(
+    phase: float | np.ndarray,
+    input_intensity: float = 1.0,
+) -> float | np.ndarray:
+    """Return ideal dark-port Michelson intensity.
+
+    The result follows I_dark = (I0 / 2) * (1 - cos(phase)). Together with
+    :func:`photodetector_intensity`, it conserves the input intensity in the
+    ideal lossless two-port model.
+    """
+    if input_intensity < 0:
+        raise ValueError("input_intensity must be non-negative")
+
+    return 0.5 * input_intensity * (1.0 - np.cos(phase))
+
+
 def intensity_from_arm_lengths(
     length_x: float,
     length_y: float,
